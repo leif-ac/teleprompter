@@ -1,0 +1,439 @@
+:root {
+	 --bg: #0b0c10;
+	 --panel: #12141a;
+	 --muted: #a7b0c0;
+	 --text: #e8ecf1;
+	 --accent: #3b82f6;
+	 --accent-2: #22c55e;
+	 --border: #1f2430;
+	 --shadow: 0 8px 24px rgba(0,0,0,0.25);
+	 --space-1: 6px;
+	 --space-2: 10px;
+	 --space-3: 14px;
+	 --space-4: 18px;
+	 --space-5: 24px;
+	 --radius: 14px;
+	 --font: 16px;
+	 --line: 1.45;
+	 --sidebar-w: 360px;
+	 --sidebar-w-wide: 420px;
+	 --tap: 44px;
+}
+ *, *::before, *::after {
+	 box-sizing: border-box;
+}
+html {
+	 overflow: hidden;
+}
+
+ html, body {
+	 height: 100%;
+}
+
+html:fullscreen body {
+	 margin: 0px;
+	 scrollbar-width: none;
+}
+
+html iframe {
+	background: red;
+}
+
+.INVERTSCREEN {
+	transform: scaleX(-1);
+}
+
+
+.warningTest .INVERTSCREEN::after {
+	content: "";
+	position: absolute;
+	inset: 0px;
+	border: 70px solid #d7c53c;;
+	pointer-events: none;
+}
+
+#error-overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 6;
+	display: grid;
+	place-items: center;
+	background: #c70000;
+	pointer-events: none;
+}
+
+#error-overlay[hidden] {
+	display: none;
+}
+
+#error-overlay span {
+	color: #fff;
+	font-size: clamp(28px, 5vw, 86px);
+	font-weight: 800;
+	text-align: center;
+	letter-spacing: 0.06em;
+	padding: 0 24px;
+}
+
+html:fullscreen #error-overlay {
+	transform: scaleX(-1);
+}
+
+
+#ready-overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 6;
+	display: grid;
+	place-items: center;
+	background: rgb(34 145 0);
+	pointer-events: none;
+}
+
+#ready-overlay[hidden] {
+	display: none;
+}
+
+#ready-overlay span {
+	color: #fff;
+	font-size: clamp(28px, 5vw, 86px);
+	font-weight: 800;
+	text-align: center;
+	letter-spacing: 0.06em;
+	padding: 0 24px;
+}
+
+html:fullscreen #ready-overlay {
+	transform: scaleX(-1);
+}
+
+.powerPointContainer {
+	border-radius: 0px !important;
+	border: 0px;
+}
+
+html:fullscreen::-webkit-scrollbar,
+html:fullscreen .tox-toolbar-overlord,
+html:fullscreen .tox-editor-header {
+	 display: none; /* Para Chrome, Safari, Edge */
+}
+
+html:fullscreen body #app {
+	 padding: 0px;
+	 grid-template-columns: 100%;
+}
+html:fullscreen body #header {
+	 position: fixed;
+	 z-index: 8;
+	 background: #12141a61;
+	 top: 15vh;
+	 left: 6px;
+	 width: clamp(320px, 30vw, 460px);
+	 max-width: calc(100vw - 12px);
+	 max-height: calc(100vh - 15vh - var(--space-5) * 2);
+}
+
+html:fullscreen body #header #notes, 
+html:fullscreen body #header #import-section, 
+html:fullscreen #toggleConfig, 
+html:fullscreen #app > div > div.tox-statusbar
+{
+	display: none;
+}
+
+ body {
+	 margin: 0;
+	 background: var(--bg);
+	 color: var(--text);
+	 font: var(--font)/var(--line) system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+	 -webkit-font-smoothing: antialiased;
+	 -moz-osx-font-smoothing: grayscale;
+}
+
+ a {
+	 color: var(--accent);
+	 text-decoration: none;
+}
+ a:hover {
+	 text-decoration: underline;
+}
+ :root {
+	 scroll-behavior: smooth;
+}
+ * {
+	 scrollbar-width: thin;
+	 scrollbar-color: var(--border) transparent;
+}
+ *::-webkit-scrollbar {
+	 height: 10px;
+	 width: 10px;
+}
+ *::-webkit-scrollbar-thumb {
+	 background: var(--border);
+	 border-radius: 999px;
+}
+ *::-webkit-scrollbar-track {
+	 background: transparent;
+}
+#app {
+	 display: grid;
+	 grid-template-columns: var(--sidebar-w) 1fr;
+	 gap: var(--space-5);
+	 min-height: 100vh;
+	 align-items: start;
+	 padding: var(--space-5);
+	 transition: grid-template-columns 0.35s ease-in, gap 0.35s ease-in;
+}
+ #app.config-hidden,
+ #app.scroll-hidden {
+	 grid-template-columns: 0px 1fr;
+	 gap: 0;
+}
+ #header {
+	 position: sticky;
+	 z-index: 9;
+	 display: grid;
+	 width: 100%;
+	 min-width: 0;
+	 gap: var(--space-1);
+	 background: var(--panel);
+	 border: 1px solid var(--border);
+	 border-radius: var(--radius);
+	 padding: var(--space-2);
+	 max-height: calc(100vh - var(--space-5) * 2);
+	 overflow: auto;
+	 opacity: 1;
+	 transition: opacity 0.35s ease-in, padding-left 0.35s ease-in, padding-right 0.35s ease-in, border-width 0.35s ease-in;
+}
+ #header.header-hidden,
+ #header.scroll-hidden {
+	 opacity: 0;
+	 padding-left: 0;
+	 padding-right: 0;
+	 border-width: 0;
+}
+ #header section, #header > div, #header #configs .config {
+	 display: flex;
+	 flex-direction: column;
+	 background: color-mix(in oklab,var(--panel),#000 8%);
+	 border: 1px solid var(--border);
+	 border-radius: calc(var(--radius) - 4px);
+	 padding: var(--space-1);
+}
+ #header section > span, #header > div > span, #header .config > span:first-child {
+	 display: block;
+	 font-size: 12px;
+	 text-transform: uppercase;
+	 letter-spacing: 0.08em;
+	 color: var(--muted);
+	 margin-bottom: var(--space-3);
+}
+ button, input[type="number"], input[type="file"], input[type="checkbox"] {
+	 font: inherit;
+	 color: inherit;
+}
+ button {
+	 display: inline-flex;
+	 align-items: center;
+	 justify-content: center;
+	 min-height: var(--tap);
+	 padding: 0 var(--space-4);
+	 border: 1px solid var(--border);
+	 border-radius: 12px;
+	 background: #1f2937;
+	 color: #fff;
+	 cursor: pointer;
+	 user-select: none;
+}
+button.active {
+	background: #0045a5
+}
+ button:hover {
+	 filter: brightness(1.08);
+}
+ button:active {
+	 transform: translateY(1px);
+}
+ button:focus-visible {
+	 outline: 3px solid color-mix(in oklab,var(--accent),#fff 10%);
+	 outline-offset: 2px;
+}
+ button.primary {
+	 background: var(--accent);
+	 border-color: color-mix(in oklab,var(--accent),#000 35%);
+}
+ button.success {
+	 background: var(--accent-2);
+	 border-color: color-mix(in oklab,var(--accent-2),#000 35%);
+}
+ button.ghost {
+	 background: transparent;
+	 color: var(--text);
+}
+ button.full {
+	 width: 100%;
+}
+ #button {
+	 display: grid;
+	 gap: var(--space-3);
+	 grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+}
+ #button button {
+	 text-align: left;
+}
+ #toggleConfig {
+	 gap: 10px;
+	 position: fixed;
+	 z-index: 10;
+	 top: 0.9vh;
+	 left: 2.6vw;
+
+	 transition: gap 0.2s ease;
+}
+ #toggleConfig span {
+	white-space: nowrap;
+	overflow: hidden;
+	opacity: 1;
+	max-width: 10em;
+
+	transition: max-width 0.35s ease-in-out,
+				opacity 0.2s ease;
+}
+#toggleConfig[data-expanded="true"] {
+	gap: 0px;
+}
+#toggleConfig[data-expanded="true"] span {
+	max-width: 0em;
+	opacity: 0;
+}
+ input[type="number"] {
+	 width: 100%;
+	 min-height: var(--tap);
+	 padding: 0 var(--space-3);
+	 border-radius: 10px;
+	 border: 1px solid var(--border);
+	 background: #0d1117;
+	 text-align: center
+}
+ input[type="number"]::placeholder {
+	 color: var(--muted);
+}
+ input[type="number"]:focus-visible {
+	 outline: 3px solid color-mix(in oklab,var(--accent),#fff 10%);
+	 outline-offset: 2px;
+}
+input[type="number"]:disabled::placeholder {
+	 background: var(--panel);
+	 color: var(--muted);
+	 opacity: 0.7; /* Deixa um pouco transparente */
+  	 cursor: not-allowed;
+}
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+}
+
+input[type="number"]::placeholder {
+	color: white;
+}
+input
+ input[type="checkbox"] {
+	 width: 22px;
+	 height: 22px;
+	 accent-color: var(--accent);
+}
+ #header > div > div {
+	 display: grid;
+	 grid-template-columns: auto 1fr;
+	 align-items: center;
+	 gap: var(--space-2) var(--space-3);
+}
+ #import-section {
+	 display: grid;
+	 grid-template-columns: 1fr auto;
+	 align-items: center;
+	 gap: var(--space-3);
+}
+ #import-section button {
+	 justify-content: center;
+	 grid-column: -1;
+}
+ #configs {
+	 display: grid;
+	 gap: var(--space-3);
+}
+ #configs .config {
+	 display: grid;
+	 grid-template-columns: 1fr auto;
+	 gap: var(--space-1);
+}
+ #configs .config aside {
+	 display: grid;
+	 width: 100%;
+	 grid-template-columns: 112px min-content 80px;
+	 align-items: center;
+	 gap: 5px;
+	 text-align: center;
+}
+ #configs .config aside div {
+	 display: flex;
+	 gap: 5px;
+}
+ #configs .config > span {
+	 font-size: 12px;
+	 color: var(--muted);
+	 align-self: center;
+}
+ #configs .config > span:first-child {
+	 grid-column: -1;
+}
+ #configs .config > div {
+	 display: inline-flex;
+	 gap: var(--space-2);
+}
+ #configs .config > div > button {
+	 min-width: 48px;
+	 font-weight: 700;
+}
+ #configs .config > span:nth-of-type(2) {
+	 font-size: 12px;
+	 color: var(--muted);
+	 align-self: center;
+}
+ #header p {
+	 margin: 0 0 var(--space-4);
+	 font-size: clamp(18px,2.2vw,28px);
+	 line-height: 1.6;
+}
+ #header strong {
+	 font-weight: 800;
+}
+ :focus-visible {
+	 scroll-margin-top: 80px;
+}
+ .hidden {
+	 display: none !important;
+}
+ .muted {
+	 color: var(--muted) !important;
+}
+ .row {
+	 display: flex;
+	 align-items: center;
+	 gap: var(--space-3);
+}
+ .col {
+	 display: grid;
+	 gap: var(--space-3);
+}
+ .full-w {
+	 width: 100%;
+}
+
+#notes > span{ margin-bottom: var(--space-2); }
+#notes p{ margin: var(--space-2) 0; padding: 10px 12px; border: 1px dashed var(--border); border-left: 4px solid var(--accent); border-radius: 10px; background: color-mix(in oklab, var(--panel), #fff 3%); color: var(--muted); font-size: 14px; }
+#notes p code{ background: #00000040; padding: 0 4px; border-radius: 6px; }
+
+html:fullscreen body.idle-ui-hidden #toggleConfig {
+	opacity: 0;
+	pointer-events: none;
+}

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Teleprompter</title>
+
+</head>
+
+<body>
+    <!-- Dialog para import -->
+    <dialog class="dialog" id="dialog-import">
+        <h3>O que importar?</h3>
+        <!--  Input Checkbox  -->
+        <div class="section-chk">
+            <span>Roteiro em Colunas?:</span>
+            <div class="btns-chk">
+                <div class="btn-chk" name="chk-col">
+                    <input type="checkbox" id="chk-col-left">
+                    <span>Coluna Esquerda</span>
+                </div>
+                <div class="btn-chk" name="chk-col">
+                    <input type="checkbox" id="chk-col-right">
+                    <span>Coluna Direita</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="choice-container">
+            <button id="btn-choice-file" class="btn-choice">
+          <span class="arrow">←</span>
+          <span>Arquivo(s)</span>
+        </button>
+
+            <button id="btn-choice-folder" class="btn-choice">
+          <span class="arrow">→</span>
+          <span>Pasta</span>
+        </button>
+        </div>
+
+
+        <button class="btn-dialog-close">
+         Cancelar
+      </button>
+    </dialog>
+
+
+    <dialog class="dialog" id="dialog-wait">
+        <h3>Processando...</h3>
+        <p>Aguarde um momento...</p>
+
+        <div class="loading-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </dialog>
+
+    <!--  Campo Overlay para diversas Inserções -->
+
+    <!--  Button Config -->
+    <button id="toggleConfig" data-expanded="false">
+      <svg
+           xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      <span>Configurações [C]</span>
+    </button>
+
+    <!--  Ferramenta Visivel -->
+    <div id="app">
+        <!--  Header  -->
+        <aside id="header">
+            <!--  Importação  -->
+            <section id="import-section">
+                <button id="import">Importar [ i ]</button>
+                <input hidden type="file" id="file-input" multiple accept=".docx,.pdf, image/*">
+                <input hidden type="file" id="folder-input" webkitdirectory directory>
+
+            </section>
+
+            <!--  Configurações -->
+            <div id="configs">
+                <!--  Opções de Configuração  [Tamanho de Fonte, Margem, Espaçamento entre Linhas, Linha entre Parágrafos, Tamanho Máximo IMG,
+            Tamanho Mínimo IMg
+            Roteiro em Colunas]-->
+            </div>
+
+            <!--  Botões  -->
+            <section id="button">
+                <!-- Área para inserção de Botões -->
+            </section>
+
+            <!--  Instruções  -->
+            <div id="notes">
+                <span>Obs:</span>
+                <p>Colar sem formatação: CTRL + SHIFT + V</p>
+            </div>
+        </aside>
+
+        <!--  Campo para inserir Avisos -->
+        <div id="error-overlay" hidden>
+            <span>Aguarde um momento..</span>
+        </div>
+
+        <div id="ready-overlay" hidden>
+            <span>Pode começar a gravação</span>
+        </div>
+
+        <!--  Editor  -->
+        <textarea id="default-editor">
+            <p><em>Hello</em>, <span style="text-decoration: underline;"><strong>World!</strong></span></p>
+        </textarea>
+    </div>
+
+
+
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/dialog.css">
+    <link rel="stylesheet" href="./scripts/tinymce/skins/content/tinymce-5-dark/content.min.css">
+
+
+    <script src="scripts/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="scripts/mammoth/mammoth.browser.min.js"></script>
+    <script src="scripts/pdf.js/pdf.min.js"></script>
+    <script>
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'scripts/pdf.js/pdf.worker.min.js';
+    </script>
+    <script src="scripts/config.js"></script>
+    <script src="scripts/sidebar.js"></script>
+    <script src="scripts/tp-mode.js"></script>
+    <script src="scripts/config-panel.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/importScript.js"></script>
+
+</body>
+
+</html>

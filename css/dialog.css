@@ -1,0 +1,97 @@
+dialog.dialog {
+	border: none;
+	border-radius: 8px;
+	padding: 20px;
+	background: #1e1e1e;
+	color: white;
+	box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+	text-align: center;
+	
+	h3 {
+	margin-top: 0;
+	}
+
+	.section-chk .btns-chk {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	margin-top: 2px;
+	}
+	.section-chk .btns-chk input {
+	margin: 0px;
+	}
+	.choice-container {
+	display: flex;
+	gap: 20px;
+	margin: 20px 0;
+	justify-content: center;
+	}
+	.choice-container .btn-choice {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 15px;
+	background: #333;
+	border: 1px solid #555;
+	color: white;
+	cursor: pointer;
+	border-radius: 6px;
+	width: 100px;
+	transition: 0.2s;
+	}
+	.choice-container .btn-choice .arrow {
+	font-size: 24px;
+	margin-bottom: 5px;
+	font-weight: bold;
+	}
+	.choice-container .btn-choice:hover {
+	background: #444;
+	border-color: #888;
+	}
+	&::backdrop {
+	background: rgba(0,0,0,0.6);
+	}
+	.btn-close {
+	background: none;
+	border: none;
+	color: #888;
+	cursor: pointer;
+	text-decoration: underline;
+	}
+
+}
+
+.loading-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.loading-dots span {
+  width: 5px;
+  height: 5px;
+  background: white;
+  border-radius: 50%;
+  animation: loading 0.8s infinite alternate;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes loading {
+  from {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+
+  to {
+    transform: translateY(-5px);
+    opacity: 1;
+  }
+}
